@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="styles.css">
+    <audio id="blowSound" src="https://www.soundjay.com/human/sounds/breath-1.mp3" preload="auto"></audio>
+</head>
+<body>
+    <canvas id="confetti"></canvas>
+
+    <div class="cake-container" id="cakeContainer">
+        <div class="cake" id="cake">
+            <div class="candle">
+                <div class="flame" id="flame"></div>
+            </div>
+            <div class="frosting"></div>
+            <div class="birthday-text">Click the cake!</div>
+        </div>
+    </div>
+
+    <!-- Ucapan ulang tahun -->
+<div class="message" id="message">
+  <h1>🎉 Happy Birthday, Sheeni 🎉</h1>
+  <button id="wishButton">Make a Wish ✨</button>
+</div>
+
+<!-- Halaman kartu -->
+<div class="card-screen" id="cardScreen">
+    <div class="card-content">
+      <img src="img/tarotcard.jpg" alt="The Star Card" class="tarot-card">
+      <p class="card-text">
+        <b>The Star</b> tells you that you are blessed and the future looks bright. Don't be afraid to dream big and believe that your wishes will come true.
+      </p>
+    </div>
+  </div>
+  
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url('img/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Overlay untuk efek opacity background */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        z-index: 0;
+    }
+
+    .cake-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    /* Base cake */
+    .cake {
+        position: relative;
+        width: 280px;
+        height: 200px;
+        background: #8B2131;
+        border-radius: 15px;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Cake layers */
+    .cake::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 66px;
+        background: #8B2131;
+        bottom: 67px;
+        border-radius: 15px;
+        border-top: 20px solid #fff;
+        border-bottom: 20px solid #fff;
+    }
+
+    /* Frosting */
+    .frosting {
+        position: absolute;
+        width: 300px;
+        height: 80px;
+        background: #fff;
+        top: -30px;
+        left: -10px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    /* Decorative fruits */
+    .frosting::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 40px;
+        top: -10px;
+        background-image: 
+            radial-gradient(circle at 20% 50%, #E63946 8px, transparent 8px),
+            radial-gradient(circle at 40% 40%, #4A90E2 6px, transparent 6px),
+            radial-gradient(circle at 60% 60%, #2ECC71 7px, transparent 7px),
+            radial-gradient(circle at 80% 45%, #E63946 8px, transparent 8px),
+            radial-gradient(circle at 30% 60%, #4A90E2 6px, transparent 6px),
+            radial-gradient(circle at 70% 50%, #2ECC71 7px, transparent 7px);
+    }
+
+    /* Mint leaves */
+    .frosting::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        top: -5px;
+        background-image: 
+            radial-gradient(ellipse at 25% 50%, #2ECC71 5px, transparent 5px),
+            radial-gradient(ellipse at 45% 45%, #2ECC71 5px, transparent 5px),
+            radial-gradient(ellipse at 65% 55%, #2ECC71 5px, transparent 5px),
+            radial-gradient(ellipse at 75% 50%, #2ECC71 5px, transparent 5px);
+    }
+
+    /* Candle */
+    .candle {
+        position: absolute;
+        width: 8px;
+        height: 35px;
+        background: linear-gradient(90deg, #FFD700, #FFF);
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        z-index: 2;
+    }
+
+    /* Flame */
+    .flame {
+        position: absolute;
+        width: 12px;
+        height: 18px;
+        background: linear-gradient(#FFD700, #FF6B6B);
+        border-radius: 50% 50% 20% 20%;
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        animation: flicker 0.6s infinite alternate;
+        z-index: 2;
+    }
+
+    @keyframes flicker {
+        0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+        100% { transform: translateX(-50%) scale(0.85); opacity: 1; }
+    }
+
+    /* Pesan setelah lilin padam */
+    .message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #8B2131;
+        font-size: 1em;
+        font-weight: bold;
+        display: none;
+        animation: fadeIn 1.5s ease forwards;
+        z-index: 2;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .birthday-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #8B2131;
+        bottom: -50px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+        .cake {
+            width: 220px;
+            height: 160px;
+        }
+        
+        .frosting {
+            width: 240px;
+        }
+
+        .message {
+            font-size: 10px ;
+        }
+    }
+    /* Confetti canvas */
+    #confetti {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 5; /* di atas overlay tapi di bawah teks */
+    }
+
+    /* Pesan ucapan */
+    #message {
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #b22222;
+        font-size: 2.5rem;
+        font-weight: bold;
+        display: none;
+        z-index: 10; /* biar di atas confetti */
+        text-shadow: 2px 2px 5px rgba(255,255,255,0.8);
+        animation: fadeIn 1.5s ease forwards;
+    }
+
+    .cake-container {
+        transition: opacity 1s ease;
+    }
+
+    .cake-container.hidden {
+        display: none;
+    }
+
+    .message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #8B2131;
+        font-size: 1.4em;
+        font-weight: bold;
+        display: none;
+        animation: fadeIn 1.5s ease forwards;
+        z-index: 10;
+    }
+    
+    .message h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    
+    #wishButton {
+        padding: 12px 35px;
+        background-color: #8B2131;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 10px rgba(139, 33, 49, 0.3);
+    }
+    
+    #wishButton:hover {
+        background-color: #a83242;
+        transform: scale(1.05);
+    }
+    
+    /* Halaman kartu */
+    .card-screen {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('img/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        z-index: 20;
+        position: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0; /* Tambahkan ini */
+        transition: opacity 1.5s ease; /* Ganti dari animation ke transition */
+    }
+    
+    /* Efek overlay putih lembut di atas background */
+    .card-screen::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        z-index: 0;
+    }
+    
+    /* Kartu tarot */
+    .tarot-card {
+        width: 180px;
+        height: auto;
+        z-index: 1;
+        margin-left: 120px;
+        position-anchor: center;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        animation: cardFadeIn 2s ease forwards;
+        animation-delay: 0.5s;
+        transform: scale(0.95);
+    }
+    
+    /* Teks di bawah kartu */
+    .card-text {
+        z-index: 2;
+        color: #8B2131;
+        font-size: 1rem;
+        text-align: center;
+        max-width: 420px;
+        margin-top: 20px;
+        line-height: 1.4;
+        opacity: 0;
+        animation: textFadeIn 2s ease forwards;
+        animation-delay: 1s;
+    }
+    
+    /* Animasi fade-in halus */
+    @keyframes cardFadeIn {
+        from {
+        opacity: 0;
+        transform: scale(0.95);
+        }
+        to {
+        opacity: 1;
+        transform: scale(1);
+        }
+    }
+    
+    @keyframes textFadeIn {
+        from {
+        opacity: 0;
+        transform: translateY(10px);
+        }
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+
+    
