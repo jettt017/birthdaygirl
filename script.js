@@ -6,6 +6,9 @@ const confettiCanvas = document.getElementById('confetti');
 const ctx = confettiCanvas.getContext('2d');
 const cardScreen = document.querySelector('.card-screen');
 const wishButton = document.getElementById('wishButton');
+const tarotCard = document.querySelector('.tarot-card');
+const cardText = document.querySelector('.card-text');
+const giftCard = document.getElementById('giftCard');
 
 // ===== Saat klik lilin / kue =====
 cake.addEventListener('click', () => {
@@ -90,3 +93,19 @@ function startConfetti() {
     const interval = setInterval(drawConfetti, 20);
     setTimeout(() => clearInterval(interval), 10000);
 }
+
+// Saat klik tarot card
+tarotCard.addEventListener('click', () => {
+    // Hilangkan tarot card & teks
+    tarotCard.style.opacity = 0;
+    cardText.style.opacity = 0;
+    setTimeout(() => {
+        tarotCard.style.display = 'none';
+        cardText.style.display = 'none';
+        // Tampilkan gift card
+        giftCard.style.display = 'flex';
+        setTimeout(() => {
+            giftCard.style.opacity = 1;
+        }, 100);
+    }, 800);
+});
