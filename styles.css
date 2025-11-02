@@ -337,52 +337,68 @@
         }
     }
 
-/* Halaman gift card */
+/* ===== Gift Card Section ===== */
 .gift-card {
-    display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('img/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    z-index: 30;
-    flex-direction: column;
+    inset: 0;
+    display: flex;
     align-items: center;
     justify-content: center;
+    background: url("img/background.jpg") center/cover no-repeat;
+    backdrop-filter: blur(6px);
     opacity: 0;
-    transition: opacity 1s ease;
-}
-
-.gift-card::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.85);
-    z-index: 0;
-}
-
-.gift-image {
-    width: 200px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    z-index: 1;
-    transition: transform 0.3s ease;
-}
-
-.gift-image:hover {
-    transform: scale(1.05);
-}
-
-.gift-text {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    color: #8B2131;
-    z-index: 1;
-    font-weight: bold;
-}
-
-
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    z-index: 1000;
+  }
+  
+  .gift-card.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .gift-card-inner {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 360px;
+    text-align: center;
+    animation: fadeUp 1s ease forwards;
+  }
+  
+  @keyframes fadeUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .gift-card-inner img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .gift-card-inner h2 {
+    font-family: "Dancing Script", cursive;
+    color: #d16ba5;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .gift-card-inner p {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
     

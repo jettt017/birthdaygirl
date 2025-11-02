@@ -94,18 +94,39 @@ function startConfetti() {
     setTimeout(() => clearInterval(interval), 10000);
 }
 
-// Saat klik tarot card
-tarotCard.addEventListener('click', () => {
-    // Hilangkan tarot card & teks
-    tarotCard.style.opacity = 0;
-    cardText.style.opacity = 0;
-    setTimeout(() => {
+// pastikan elemen ada
+// ===== Gift card behavior =====
+// ===== Gift card behavior =====
+if (tarotCard) {
+    tarotCard.addEventListener('click', () => {
+      // Fade out tarot card & text
+      tarotCard.style.transition = 'opacity 0.8s ease';
+      cardText.style.transition = 'opacity 0.8s ease';
+      tarotCard.style.opacity = 0;
+      cardText.style.opacity = 0;
+  
+      setTimeout(() => {
         tarotCard.style.display = 'none';
         cardText.style.display = 'none';
-        // Tampilkan gift card
-        giftCard.style.display = 'flex';
-        setTimeout(() => {
-            giftCard.style.opacity = 1;
-        }, 100);
-    }, 800);
-});
+  
+        // Show gift card
+        giftCard.classList.add('show');
+        giftCard.setAttribute('aria-hidden', 'false');
+      }, 850);
+    });
+  }
+  
+  // Optional: klik di luar inner card untuk nutup
+  giftCard.addEventListener('click', (e) => {
+    if (e.target === giftCard) {
+      giftCard.classList.remove('show');
+      giftCard.setAttribute('aria-hidden', 'true');
+      tarotCard.style.display = '';
+      cardText.style.display = '';
+      setTimeout(() => {
+        tarotCard.style.opacity = 1;
+        cardText.style.opacity = 1;
+      }, 100);
+    }
+  });
+  
